@@ -1,0 +1,37 @@
+﻿<Window x:Class="MyInventory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyInventory"
+        xmlns:vm="clr-namespace:MyInventory.ViewModel"
+        mc:Ignorable="d"
+        Title="Инвентарь" Height="600" Width="1000" Background="LightGray" Closing="Window_Closing"
+        MinHeight="500" MinWidth="1050" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False" Background="#EFEFEF" Grid.RowSpan="2">
+            <RadioButton Content="Обзор" IsChecked="{Binding ItemsPageOpened}" Command="{Binding OpenItemsPage}" Height="40" FontSize="16" DockPanel.Dock="Top" Style="{StaticResource MenuButtonStyle}"/>
+            <RadioButton Content="Инвентаризация" Command="{Binding OpenStocktakingPage}" Height="40" FontSize="16" DockPanel.Dock="Top" Style="{StaticResource MenuButtonStyle}"/>
+            <RadioButton Content="Редактирование" Command="{Binding OpenUtilitiesPage}" Height="40" FontSize="16" DockPanel.Dock="Top" Style="{StaticResource MenuButtonStyle}"/>
+            <RadioButton Content="История" Command="{Binding OpenStocktakingHistory}" Height="40" FontSize="16" DockPanel.Dock="Top" Style="{StaticResource MenuButtonStyle}"/>
+            <RadioButton Content="Сменить профиль" IsChecked="True" Command="{Binding OpenProfileSelectionPage}" Height="40" FontSize="16" DockPanel.Dock="Bottom" Style="{StaticResource MenuButtonStyle}"/>
+        </DockPanel>
+
+        <Frame Content="{Binding CurrentView}" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <StatusBar Background="#EBEBEB" Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="{Binding StatusText}"/>
+        </StatusBar>
+    </Grid>
+</Window>

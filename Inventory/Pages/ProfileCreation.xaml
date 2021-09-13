@@ -1,0 +1,41 @@
+﻿<Page x:Class="MyInventory.Pages.ProfileCreation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyInventory.Pages"
+      xmlns:conv="clr-namespace:MyInventory.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800" d:Background="White"
+      Title="ProfileCreation">
+    <Page.Resources>
+        <conv:ExcludeNotSelectedConverter x:Key="ExcludeNotSelectedConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Text="Имя:"/>
+            <TextBox Text="{Binding NewProfile.Name}" Height="22" Margin="0 0 0 5"/>
+            <TextBlock Text="Пароль:" DockPanel.Dock="Top"/>
+            <TextBox Text="{Binding NewProfile.Password}" Height="22"/>
+            <TextBlock Text="Пароль администратора:"/>
+            <TextBox Text="{Binding AdminCreatePassword}" Height="22"/>
+            <Button Command="{Binding AddNewProfile}" Content="Создать" Margin="0 10 0 0"/>
+
+            <TextBlock Text="Профиль:" Margin="0 60 0 0"/>
+            <ComboBox ItemsSource="{Binding Profiles, Converter={StaticResource ExcludeNotSelectedConverter}}" SelectedItem="{Binding SelectedProfile}" DisplayMemberPath="Name"/>
+            <TextBlock Text="Пароль администратора:"/>
+            <TextBox Text="{Binding AdminRemovePassword}" Height="22"/>
+            <Button Command="{Binding RemoveSelectedProfile}" Content="Удалить" Margin="0 10 0 0"/>
+            
+            <Button Command="{Binding Back}" Content="Назад" Margin="0 60 0 0"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

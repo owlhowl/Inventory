@@ -1,0 +1,138 @@
+﻿<Page x:Class="MyInventory.Pages.Utilities"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyInventory.Pages"
+      xmlns:conv="clr-namespace:MyInventory.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000" d:Background="White"
+      Title="Utilities">
+    <Page.Resources>
+        <conv:ShortDateConverter x:Key="ShortDateConverter"/>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectedItem="{Binding SelectedItem}" HorizontalScrollBarVisibility="Visible" CanUserResizeRows="False" CanUserResizeColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding ItemType.Name}" Header="Наименование" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Location}" Header="Местонахождение" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding InvNumber}" Header="Инв. номер" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding ItemType.MeasureUnit}" Header="Ед. изм." Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding RegistrationDate, Converter={StaticResource ShortDateConverter}}" Header="Дата постановки на учет" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding ExpirationDate, Converter={StaticResource ShortDateConverter}}" Header="Срок эксплуатации" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid ItemsSource="{Binding ItemTypes}" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectedItem="{Binding SelectedItemType}" Grid.Column="1" HorizontalScrollBarVisibility="Visible" CanUserResizeRows="False" CanUserResizeColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding MeasureUnit}" Header="Единица измерения" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Описание" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="#BFBFBF" BorderThickness="2" Grid.RowSpan="2" Margin="-1 -2 -2 -2"/>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="5">
+            <TextBlock Text="Тип имущества" HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Наименование" Margin="0 5 5 0"/>
+                <TextBox Text="{Binding NewItemType.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Padding="1" Margin="0 5 0 0" Height="22"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Ед. измерения" Margin="0 5 5 0"/>
+                <TextBox Text="{Binding NewItemType.MeasureUnit}" Grid.Column="1" Margin="0 5 0 0" Height="22" Padding="1" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Описание" Margin="0 5 5 0"/>
+                <TextBox Text="{Binding NewItemType.Description}" Grid.Column="1" Margin="0 5 0 0" Height="64" Padding="1" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding AddNewItemType}" Content="Добавить" Width="150" Height="24" Margin="0 5 5 5"/>
+                <Button Command="{Binding RemoveSelectedItemType}" Content="Удалить" Width="150" Height="24" Margin="0 5 0 5"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="5">
+            <TextBlock Text="Имущество" HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Тип имущества" Margin="0 5 5 0"/>
+                <ComboBox DisplayMemberPath="Name" SelectedItem="{Binding NewItem.ItemType}" ItemsSource="{Binding ItemTypes}" Grid.Column="1" Margin="0 5 0 0"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Инвентарный номер" Margin="0 5 5 0"/>
+                <TextBox Text="{Binding NewItem.InvNumber}" Grid.Column="1" Margin="0 5 0 0" Height="22" Padding="1" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Количество" Margin="0 5 5 0"/>
+                <TextBox Text="{Binding NewItem.Quantity}" Grid.Column="1" Margin="0 5 0 0" Height="22" Padding="1" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Местоположение" Margin="0 5 5 0" Padding="1"/>
+                <TextBox Text="{Binding NewItem.Location}" Grid.Column="1" Margin="0 5 0 0" Height="22" Padding="1" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Дата постановки на учет" Margin="0 5 5 0"/>
+                <DatePicker SelectedDate="{Binding NewItem.RegistrationDate}" Grid.Column="1" Margin="0 5 0 0" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Срок эксплуатации" Margin="0 5 5 0"/>
+                <DatePicker SelectedDate="{Binding NewItem.ExpirationDate}" Grid.Column="1" Margin="0 5 0 0"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding AddNewItem}" Content="Добавить" Width="150" Height="24" Margin="0 5 5 5"/>
+                <Button Command="{Binding RemoveSelectedItem}" Content="Удалить" Width="150" Height="24" Margin="0 5 0 5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

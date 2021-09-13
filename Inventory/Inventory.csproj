@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>MyInventory</RootNamespace>
     <AssemblyName>My Inventory</AssemblyName>
-    <ApplicationIcon>inv(1).ico</ApplicationIcon>
+    <ApplicationIcon>inv.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

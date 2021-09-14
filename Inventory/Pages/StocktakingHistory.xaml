@@ -31,7 +31,7 @@
                 <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding MeasureUnit}" Header="Ед. изм." Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding RegistrationDate, Converter={StaticResource ShortDateConverter}}" Header="Дата постановки на учет" Width="Auto"/>
-                <DataGridTextColumn Binding="{Binding ExpirationDate, Converter={StaticResource ShortDateConverter}}" Header="Срок эксплуатации" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding ExpirationDate, Converter={StaticResource ShortDateConverter}}" Header="Дата снятия с учета" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel LastChildFill="False" Grid.Row="1">

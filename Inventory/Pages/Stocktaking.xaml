@@ -27,7 +27,7 @@
                 <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding ItemType.MeasureUnit}" IsReadOnly="True" Header="Ед. изм." Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding RegistrationDate, Converter={StaticResource ShortDateConverter}}" IsReadOnly="True" Header="Дата постановки на учет" Width="Auto"/>
-                <DataGridTextColumn Binding="{Binding ExpirationDate, Converter={StaticResource ShortDateConverter}}" Header="Срок эксплуатации" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding ExpirationDate, Converter={StaticResource ShortDateConverter}}" Header="Дата снятия с учета" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
 

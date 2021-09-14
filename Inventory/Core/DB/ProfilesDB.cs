@@ -30,6 +30,7 @@ namespace MyInventory.Core.DB
             profile.ID = _autoIncrementId;
             _autoIncrementId++;
             _db.Add(profile);
+            Directory.CreateDirectory("profile" + profile.ID.ToString());
             return profile;
         }
 

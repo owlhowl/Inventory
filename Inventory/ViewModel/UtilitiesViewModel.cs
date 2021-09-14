@@ -79,6 +79,8 @@ namespace MyInventory.ViewModel
                 {
                     if (NewItem.ItemType == null)
                         mainVM.ShowMessage("Выберите тип имущества!");
+                    else if (_itemTypesDB.GetDB().Exists((type) => type.Name == NewItemType.Name))
+                        mainVM.ShowMessage("Тип уже существует!");
                     else
                     {
                         ItemEntry newItem = _itemsDB.AddItem(NewItem);

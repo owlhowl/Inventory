@@ -36,6 +36,8 @@ namespace MyInventory.ViewModel
                 {
                     if (string.IsNullOrWhiteSpace(NewProfile.Name))
                         mainVM.ShowMessage("Введите имя профиля!");
+                    else if (_profilesDB.GetDB().Exists((p) => p.Name == NewProfile.Name))
+                        mainVM.ShowMessage("Профиль уже существует!");
                     else if (string.IsNullOrWhiteSpace(NewProfile.Password))
                         mainVM.ShowMessage("Введите пароль!");
                     else if (AppSettings.AdminPassword != AdminCreatePassword)
